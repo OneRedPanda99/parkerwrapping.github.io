@@ -1237,22 +1237,37 @@ section {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 2000;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
     padding: 2rem;
 }
 
 .thank-you-overlay.show {
     opacity: 1;
     visibility: visible;
+}
+
+/* Blur the main content when modal is open */
+body.modal-open .hero,
+body.modal-open .services,
+body.modal-open .pricing,
+body.modal-open .wrapping-papers,
+body.modal-open .gallery,
+body.modal-open .contact,
+body.modal-open .footer,
+body.modal-open .navbar {
+    filter: blur(3px);
+    transition: filter 0.4s ease;
 }
 
 .thank-you-modal {
@@ -1263,14 +1278,16 @@ section {
     width: 100%;
     position: relative;
     border: 2px solid var(--primary-color);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
     text-align: center;
-    transform: scale(0.8);
-    transition: transform 0.3s ease;
+    transform: scale(0.7) translateY(-50px);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    opacity: 0;
 }
 
 .thank-you-overlay.show .thank-you-modal {
-    transform: scale(1);
+    transform: scale(1) translateY(0);
+    opacity: 1;
 }
 
 .close-modal {

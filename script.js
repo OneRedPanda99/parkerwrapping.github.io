@@ -122,11 +122,52 @@ function setupScrollEffects() {
 
 // Contact form and thank you modal handling
 function setupContactForm() {
-    // Check if we should show thank you modal on page load
-    if (window.location.hash === '#thank-you') {
-        showThankYou();
-        // Clean up the URL
-        history.replaceState(null, null, window.location.pathname);
+    const form = document.getElementById('contact-form');
+    if (form) {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            
+            // Show loading state
+            submitBtn.textContent = 'SENDING...';
+            submitBtn.disabled = true;
+            
+            try {
+                // Get form data
+                const formData = new FormData(form);
+                
+                // Add FormSubmit configuration
+                formData.append('_subject', 'New Gift Wrapping Inquiry!');
+                formData.append('_autoresponse', 'Thanks for reaching out! I\'ll get back to you soon about your gift wrapping needs. - Parker');
+                formData.append('_template', 'table');
+                formData.append('_captcha', 'false');
+                
+                // Submit to FormSubmit
+                const response = await fetch('https://formsubmit.co/parkerbranham@gmail.com', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (response.ok) {
+                    // Show thank you modal
+                    showThankYou();
+                    // Reset form
+                    form.reset();
+                } else {
+                    throw new Error('Form submission failed');
+                }
+                
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                alert('Sorry, there was an error sending your message. Please try again or contact me directly.');
+            } finally {
+                // Restore button
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
     }
 }
 
@@ -135,6 +176,8 @@ function showThankYou() {
     const overlay = document.getElementById('thank-you-overlay');
     if (overlay) {
         overlay.classList.add('show');
+        // Add blur effect to background
+        document.body.classList.add('modal-open');
         // Prevent body scrolling when modal is open
         document.body.style.overflow = 'hidden';
     }
@@ -145,6 +188,8 @@ function closeThankYou() {
     const overlay = document.getElementById('thank-you-overlay');
     if (overlay) {
         overlay.classList.remove('show');
+        // Remove blur effect from background
+        document.body.classList.remove('modal-open');
         // Restore body scrolling
         document.body.style.overflow = 'auto';
     }
