@@ -22,7 +22,7 @@
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link">HOME</a></li>
                 <li><a href="#services" class="nav-link">SERVICES</a></li>
-                <li><a href="#calculator" class="nav-link">PRICING</a></li>
+                <li><a href="#pricing" class="nav-link">PRICING</a></li>
                 <li><a href="#gallery" class="nav-link">GALLERY</a></li>
                 <li><a href="#contact" class="nav-link">CONTACT</a></li>
             </ul>
@@ -54,7 +54,7 @@
                 <p class="hero-subtitle">Precision. Elegance. Perfection.</p>
                 <p class="hero-description">Transform your gifts into masterpieces with our professional wrapping services. Expert craftsmanship meets modern convenience.</p>
                 <div class="hero-buttons">
-                    <a href="#calculator" class="btn btn-primary">GET QUOTE</a>
+                    <a href="#pricing" class="btn btn-primary">VIEW PRICING</a>
                     <a href="#gallery" class="btn btn-secondary">VIEW WORK</a>
                 </div>
             </div>
@@ -94,59 +94,170 @@
         </div>
     </section>
 
-    <!-- Calculator Section -->
-    <section id="calculator" class="calculator">
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">PRICING CALCULATOR</h2>
-                <p class="section-subtitle">Get instant quotes for your wrapping needs</p>
+                <h2 class="section-title">PRICING</h2>
+                <p class="section-subtitle">Simple, transparent pricing for every occasion</p>
             </div>
-            <div class="calculator-container">
-                <div class="calculator-form">
-                    <div class="input-group">
-                        <label for="length">Length (inches)</label>
-                        <input type="number" id="length" min="1" step="0.1" placeholder="12">
+            
+            <!-- Individual Items -->
+            <div class="pricing-category">
+                <h3 class="category-title">INDIVIDUAL ITEMS</h3>
+                <div class="pricing-grid">
+                    <div class="pricing-card" data-aos="fade-up" data-delay="100">
+                        <div class="pricing-icon">📱</div>
+                        <h4>Small Items</h4>
+                        <p class="pricing-description">Phone cases, jewelry, small books, ornaments</p>
+                        <div class="pricing-options">
+                            <div class="price-option">
+                                <span class="price-label">Basic:</span>
+                                <span class="price-value">$3.00</span>
+                            </div>
+                            <div class="price-option">
+                                <span class="price-label">With Bow:</span>
+                                <span class="price-value">$5.00</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="input-group">
-                        <label for="width">Width (inches)</label>
-                        <input type="number" id="width" min="1" step="0.1" placeholder="14">
+                    
+                    <div class="pricing-card" data-aos="fade-up" data-delay="200">
+                        <div class="pricing-icon">📦</div>
+                        <h4>Medium Items</h4>
+                        <p class="pricing-description">Clothing, books, games, small electronics</p>
+                        <div class="pricing-options">
+                            <div class="price-option">
+                                <span class="price-label">Basic:</span>
+                                <span class="price-value">$5.00</span>
+                            </div>
+                            <div class="price-option">
+                                <span class="price-label">With Bow:</span>
+                                <span class="price-value">$8.00</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="input-group">
-                        <label for="height">Height (inches)</label>
-                        <input type="number" id="height" min="1" step="0.1" placeholder="3">
+                    
+                    <div class="pricing-card" data-aos="fade-up" data-delay="300">
+                        <div class="pricing-icon">📺</div>
+                        <h4>Large Items</h4>
+                        <p class="pricing-description">Electronics, large toys, appliances</p>
+                        <div class="pricing-options">
+                            <div class="price-option">
+                                <span class="price-label">Basic:</span>
+                                <span class="price-value">$10.00</span>
+                            </div>
+                            <div class="price-option">
+                                <span class="price-label">With Bow:</span>
+                                <span class="price-value">$15.00</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="service-options">
-                        <label class="radio-option">
-                            <input type="radio" name="service" value="basic" checked>
-                            <span class="radio-custom"></span>
-                            Basic Wrapping ($0.01/sq in)
-                        </label>
-                        <label class="radio-option">
-                            <input type="radio" name="service" value="premium">
-                            <span class="radio-custom"></span>
-                            Premium with Bow ($0.015/sq in)
-                        </label>
+                    
+                    <div class="pricing-card" data-aos="fade-up" data-delay="400">
+                        <div class="pricing-icon">🎁</div>
+                        <h4>Extra Large Items</h4>
+                        <p class="pricing-description">Big electronics, furniture pieces, oversized items</p>
+                        <div class="pricing-options">
+                            <div class="price-option">
+                                <span class="price-label">Basic:</span>
+                                <span class="price-value">$15.00</span>
+                            </div>
+                            <div class="price-option">
+                                <span class="price-label">With Bow:</span>
+                                <span class="price-value">$22.00</span>
+                            </div>
+                        </div>
                     </div>
-                    <button class="btn btn-primary" onclick="calculatePrice()">CALCULATE PRICE</button>
                 </div>
-                <div class="calculator-result">
-                    <div class="result-display">
-                        <div class="result-item">
-                            <span class="result-label">Surface Area:</span>
-                            <span class="result-value" id="surface-area">0 sq in</span>
+            </div>
+            
+            <!-- Bulk Pricing -->
+            <div class="pricing-category bulk-pricing">
+                <h3 class="category-title">BULK PACKAGES</h3>
+                <div class="bulk-grid">
+                    <div class="bulk-card" data-aos="zoom-in" data-delay="100">
+                        <div class="bulk-header">
+                            <h4>FAMILY PACK</h4>
+                            <span class="bulk-count">5-10 Items</span>
                         </div>
-                        <div class="result-item">
-                            <span class="result-label">Base Price:</span>
-                            <span class="result-value" id="base-price">$0.00</span>
-                        </div>
-                        <div class="result-item total">
-                            <span class="result-label">Total Price:</span>
-                            <span class="result-value" id="total-price">$0.00</span>
+                        <div class="bulk-content">
+                            <div class="bulk-price">$35</div>
+                            <p class="bulk-description">Perfect for family Christmas gifts</p>
+                            <ul class="bulk-features">
+                                <li>✓ Mix of small & medium items</li>
+                                <li>✓ Basic wrapping included</li>
+                                <li>✓ 20% discount applied</li>
+                                <li>✓ Bows available (+$2 each)</li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="calculation-breakdown">
-                        <h4>Calculation Breakdown:</h4>
-                        <div id="breakdown-details"></div>
+                    
+                    <div class="bulk-card featured" data-aos="zoom-in" data-delay="200">
+                        <div class="bulk-badge">MOST POPULAR</div>
+                        <div class="bulk-header">
+                            <h4>PARTY PACK</h4>
+                            <span class="bulk-count">10-20 Items</span>
+                        </div>
+                        <div class="bulk-content">
+                            <div class="bulk-price">$60</div>
+                            <p class="bulk-description">Great for office parties & events</p>
+                            <ul class="bulk-features">
+                                <li>✓ All size items included</li>
+                                <li>✓ Premium wrapping paper</li>
+                                <li>✓ 30% discount applied</li>
+                                <li>✓ Free bows included</li>
+                                <li>✓ Coordinated color scheme</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="bulk-card" data-aos="zoom-in" data-delay="300">
+                        <div class="bulk-header">
+                            <h4>BUSINESS PACK</h4>
+                            <span class="bulk-count">20+ Items</span>
+                        </div>
+                        <div class="bulk-content">
+                            <div class="bulk-price">$100</div>
+                            <p class="bulk-description">Corporate gifts made easy</p>
+                            <ul class="bulk-features">
+                                <li>✓ Professional presentation</li>
+                                <li>✓ Premium paper & ribbons</li>
+                                <li>✓ 40% discount applied</li>
+                                <li>✓ Custom branding available</li>
+                                <li>✓ Delivery coordination</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Special Services -->
+            <div class="pricing-category special-services">
+                <h3 class="category-title">SPECIAL SERVICES</h3>
+                <div class="services-pricing-grid">
+                    <div class="service-pricing-card" data-aos="fade-up" data-delay="100">
+                        <h4>🎀 Custom Bow Design</h4>
+                        <div class="service-price">+$3 per item</div>
+                        <p>Handcrafted decorative bows in your choice of colors</p>
+                    </div>
+                    
+                    <div class="service-pricing-card" data-aos="fade-up" data-delay="200">
+                        <h4>🏷️ Gift Tags & Cards</h4>
+                        <div class="service-price">+$1 per item</div>
+                        <p>Personalized gift tags and greeting cards</p>
+                    </div>
+                    
+                    <div class="service-pricing-card" data-aos="fade-up" data-delay="300">
+                        <h4>🚚 Pickup/Delivery</h4>
+                        <div class="service-price">$10 flat rate</div>
+                        <p>Convenient pickup and delivery within local area</p>
+                    </div>
+                    
+                    <div class="service-pricing-card" data-aos="fade-up" data-delay="400">
+                        <h4>⚡ Rush Service</h4>
+                        <div class="service-price">+50% surcharge</div>
+                        <p>Same-day or next-day wrapping service</p>
                     </div>
                 </div>
             </div>
