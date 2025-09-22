@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parker's Gift Wrapping - Professional Gift Wrapping Services</title>
+    <meta name="description" content="Professional gift wrapping services for Christmas and special occasions. Custom bows, perfect presentations, competitive rates.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎁</text></svg>">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brand-icon">🎁</span>
+                <span class="brand-text">PARKER WRAPPING</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">HOME</a></li>
+                <li><a href="#services" class="nav-link">SERVICES</a></li>
+                <li><a href="#calculator" class="nav-link">PRICING</a></li>
+                <li><a href="#gallery" class="nav-link">GALLERY</a></li>
+                <li><a href="#contact" class="nav-link">CONTACT</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <div class="geometric-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+            </div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="title-line">PROFESSIONAL</span>
+                    <span class="title-line">GIFT WRAPPING</span>
+                    <span class="title-highlight">REDEFINED</span>
+                </h1>
+                <p class="hero-subtitle">Precision. Elegance. Perfection.</p>
+                <p class="hero-description">Transform your gifts into masterpieces with our professional wrapping services. Expert craftsmanship meets modern convenience.</p>
+                <div class="hero-buttons">
+                    <a href="#calculator" class="btn btn-primary">GET QUOTE</a>
+                    <a href="#gallery" class="btn btn-secondary">VIEW WORK</a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">SERVICES</h2>
+                <p class="section-subtitle">Professional wrapping solutions for every occasion</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card" data-aos="fade-up" data-delay="100">
+                    <div class="service-icon">📦</div>
+                    <h3>Basic Wrapping</h3>
+                    <p>Clean, professional wrapping with premium paper and precise folding techniques.</p>
+                    <div class="service-price">$0.01/sq inch</div>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-delay="200">
+                    <div class="service-icon">🎀</div>
+                    <h3>Premium with Bow</h3>
+                    <p>Elevated presentation with custom bows and decorative elements for special occasions.</p>
+                    <div class="service-price">$0.015/sq inch</div>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-delay="300">
+                    <div class="service-icon">✨</div>
+                    <h3>Custom Design</h3>
+                    <p>Bespoke wrapping solutions tailored to your specific requirements and themes.</p>
+                    <div class="service-price">Contact for quote</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section id="calculator" class="calculator">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">PRICING CALCULATOR</h2>
+                <p class="section-subtitle">Get instant quotes for your wrapping needs</p>
+            </div>
+            <div class="calculator-container">
+                <div class="calculator-form">
+                    <div class="input-group">
+                        <label for="length">Length (inches)</label>
+                        <input type="number" id="length" min="1" step="0.1" placeholder="12">
+                    </div>
+                    <div class="input-group">
+                        <label for="width">Width (inches)</label>
+                        <input type="number" id="width" min="1" step="0.1" placeholder="14">
+                    </div>
+                    <div class="input-group">
+                        <label for="height">Height (inches)</label>
+                        <input type="number" id="height" min="1" step="0.1" placeholder="3">
+                    </div>
+                    <div class="service-options">
+                        <label class="radio-option">
+                            <input type="radio" name="service" value="basic" checked>
+                            <span class="radio-custom"></span>
+                            Basic Wrapping ($0.01/sq in)
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="service" value="premium">
+                            <span class="radio-custom"></span>
+                            Premium with Bow ($0.015/sq in)
+                        </label>
+                    </div>
+                    <button class="btn btn-primary" onclick="calculatePrice()">CALCULATE PRICE</button>
+                </div>
+                <div class="calculator-result">
+                    <div class="result-display">
+                        <div class="result-item">
+                            <span class="result-label">Surface Area:</span>
+                            <span class="result-value" id="surface-area">0 sq in</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Base Price:</span>
+                            <span class="result-value" id="base-price">$0.00</span>
+                        </div>
+                        <div class="result-item total">
+                            <span class="result-label">Total Price:</span>
+                            <span class="result-value" id="total-price">$0.00</span>
+                        </div>
+                    </div>
+                    <div class="calculation-breakdown">
+                        <h4>Calculation Breakdown:</h4>
+                        <div id="breakdown-details"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">GALLERY</h2>
+                <p class="section-subtitle">Showcase of our professional wrapping artistry</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item" data-aos="zoom-in" data-delay="100">
+                    <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&h=400&fit=crop&crop=center" alt="Elegant gift wrapping with gold ribbon">
+                    <div class="gallery-overlay">
+                        <h4>Elegant Gold Collection</h4>
+                        <p>Premium wrapping with metallic accents</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-delay="200">
+                    <img src="https://images.unsplash.com/photo-1512909006721-3d6018887943?w=400&h=400&fit=crop&crop=center" alt="Christmas gift wrapping">
+                    <div class="gallery-overlay">
+                        <h4>Holiday Special</h4>
+                        <p>Festive Christmas wrapping designs</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-delay="300">
+                    <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=400&h=400&fit=crop&crop=center" alt="Minimalist gift wrapping">
+                    <div class="gallery-overlay">
+                        <h4>Minimalist Style</h4>
+                        <p>Clean, modern wrapping approach</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-delay="400">
+                    <img src="https://images.unsplash.com/photo-1606728035253-49e8a23146de?w=400&h=400&fit=crop&crop=center" alt="Custom bow wrapping">
+                    <div class="gallery-overlay">
+                        <h4>Custom Bows</h4>
+                        <p>Handcrafted decorative elements</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-delay="500">
+                    <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?w=400&h=400&fit=crop&crop=center" alt="Birthday gift wrapping">
+                    <div class="gallery-overlay">
+                        <h4>Birthday Collection</h4>
+                        <p>Colorful celebration wrapping</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-delay="600">
+                    <img src="https://images.unsplash.com/photo-1607734834519-d8576ae60ea4?w=400&h=400&fit=crop&crop=center" alt="Professional gift presentation">
+                    <div class="gallery-overlay">
+                        <h4>Corporate Gifts</h4>
+                        <p>Professional business presentations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">CONTACT</h2>
+                <p class="section-subtitle">Ready to transform your gifts? Get in touch.</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p>parker@wrappingservice.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📱</div>
+                        <div class="contact-details">
+                            <h4>Phone</h4>
+                            <p>Available upon request</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">⏰</div>
+                        <div class="contact-details">
+                            <h4>Availability</h4>
+                            <p>Flexible scheduling for Christmas season</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" placeholder="Tell me about your wrapping needs..." rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">SEND MESSAGE</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="brand-icon">🎁</span>
+                    <span class="brand-text">PARKER WRAPPING</span>
+                </div>
+                <p class="footer-text">Professional gift wrapping services • Christmas 2024</p>
+                <p class="footer-copyright">© 2024 Parker's Gift Wrapping. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
