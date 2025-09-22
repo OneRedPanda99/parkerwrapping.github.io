@@ -352,7 +352,8 @@
                         <input type="hidden" name="_subject" value="New Gift Wrapping Inquiry!">
                         <input type="hidden" name="_autoresponse" value="Thanks for reaching out! I'll get back to you soon about your gift wrapping needs. - Parker">
                         <input type="hidden" name="_template" value="table">
-                        <input type="hidden" name="_next" value="https://oneredpanda99.github.io/parkerwrapping.github.io/thank-you.html">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_next" value="https://oneredpanda99.github.io/parkerwrapping.github.io/#thank-you">
                         
                         <div class="form-group">
                             <input type="text" name="name" placeholder="Your Name" required>
@@ -386,6 +387,33 @@
             </div>
         </div>
     </footer>
+
+    <!-- Thank You Overlay Modal -->
+    <div id="thank-you-overlay" class="thank-you-overlay">
+        <div class="thank-you-modal">
+            <button class="close-modal" onclick="closeThankYou()">&times;</button>
+            <div class="thank-you-content">
+                <div class="thank-you-icon">🎁✨</div>
+                <h2 class="thank-you-title">Thank You!</h2>
+                <p class="thank-you-message">
+                    Your message has been sent successfully! I've received your gift wrapping inquiry and will get back to you soon.
+                </p>
+                <div class="contact-quick-info">
+                    <div class="contact-item">
+                        <span class="contact-icon">📧</span>
+                        <span>parkerbranham@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">📱</span>
+                        <span>(803) 351-2333</span>
+                    </div>
+                </div>
+                <div class="response-time">
+                    <strong>⏰ Response Time:</strong> I typically respond within 24 hours during Christmas season!
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

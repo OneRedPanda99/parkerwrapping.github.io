@@ -120,11 +120,62 @@ function setupScrollEffects() {
     });
 }
 
-// Contact form now handled by FormSubmit - no JavaScript needed
+// Contact form and thank you modal handling
 function setupContactForm() {
-    // Form now submits directly to FormSubmit service
-    // No additional JavaScript handling required
+    // Check if we should show thank you modal on page load
+    if (window.location.hash === '#thank-you') {
+        showThankYou();
+        // Clean up the URL
+        history.replaceState(null, null, window.location.pathname);
+    }
 }
+
+// Show thank you modal
+function showThankYou() {
+    const overlay = document.getElementById('thank-you-overlay');
+    if (overlay) {
+        overlay.classList.add('show');
+        // Prevent body scrolling when modal is open
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+// Close thank you modal
+function closeThankYou() {
+    const overlay = document.getElementById('thank-you-overlay');
+    if (overlay) {
+        overlay.classList.remove('show');
+        // Restore body scrolling
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Close modal when clicking outside of it
+document.addEventListener('click', function(e) {
+    const overlay = document.getElementById('thank-you-overlay');
+    if (e.target === overlay) {
+        closeThankYou();
+    }
+});
+
+// Handle Escape key for modal and mobile menu
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        // Close thank you modal if open
+        const overlay = document.getElementById('thank-you-overlay');
+        if (overlay && overlay.classList.contains('show')) {
+            closeThankYou();
+        } else {
+            // Close mobile menu if open
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            if (hamburger && navMenu) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        }
+    }
+});
 
 // Email validation helper
 function isValidEmail(email) {
@@ -193,18 +244,7 @@ function showNotification(message, type = 'info') {
     }, 5000);
 }
 
-// Add keyboard navigation for accessibility
-document.addEventListener('keydown', function(e) {
-    // ESC key closes mobile menu
-    if (e.key === 'Escape') {
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
-        if (hamburger && navMenu) {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-        }
-    }
-});
+// Add keyboard navigation for accessibility (moved to modal section above)
 
 // Smooth reveal animation for page load
 window.addEventListener('load', function() {
