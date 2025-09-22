@@ -14,6 +14,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Add scroll effects
     setupScrollEffects();
+    
+    // Ensure modal is hidden on page load
+    initializeModal();
 });
 
 // Navigation functionality
@@ -118,6 +121,17 @@ function setupScrollEffects() {
         
         lastScrollY = currentScrollY;
     });
+}
+
+// Initialize modal to ensure it's hidden on page load
+function initializeModal() {
+    const overlay = document.getElementById('thank-you-overlay');
+    if (overlay) {
+        // Explicitly ensure modal is hidden
+        overlay.classList.remove('show');
+        document.body.classList.remove('modal-open');
+        document.body.style.overflow = 'auto';
+    }
 }
 
 // Contact form and thank you modal handling
