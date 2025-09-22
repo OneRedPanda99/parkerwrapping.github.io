@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parker's Calculator - On-Site Tool</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #d42c2c;
+            --secondary-color: #2e7d32;
+            --accent-color: #ffc107;
+            --dark-bg: #fef9f3;
+            --light-bg: #ffffff;
+            --text-primary: #2c3e50;
+            --text-secondary: #5d6d7e;
+            --border-color: #e8ddd4;
+            --font-primary: 'Fredoka One', cursive;
+            --font-secondary: 'Poppins', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-secondary);
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            padding: 1rem;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--light-bg);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 2px solid var(--primary-color);
+        }
+
+        .header-title {
+            font-family: var(--font-primary);
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+
+        .logout-btn {
+            padding: 8px 16px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: var(--secondary-color);
+        }
+
+        .calculator-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .input-section, .results-section {
+            background: var(--light-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            font-family: var(--font-primary);
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .gift-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .form-group input, .form-group select {
+            padding: 10px 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .add-gift-btn {
+            padding: 12px 20px;
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .add-gift-btn:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .gift-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .gift-item {
+            background: var(--dark-bg);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .gift-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .gift-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .gift-name {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .gift-price {
+            font-family: var(--font-primary);
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        .gift-details {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .remove-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .totals {
+            background: var(--secondary-color);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .total-row:last-child {
+            margin-bottom: 0;
+            padding-top: 0.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .discount-selector {
+            background: var(--accent-color);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .discount-selector label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .discount-selector select {
+            width: 100%;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .clear-all-btn {
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .clear-all-btn:hover {
+            background: #b91c1c;
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .quick-btn {
+            flex: 1;
+            padding: 8px 12px;
+            background: var(--accent-color);
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quick-btn:hover {
+            background: #e0a800;
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 768px) {
+            .calculator-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 class="header-title">🎁 Parker's Quote Calculator</h1>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+
+    <div class="calculator-container">
+        <!-- Input Section -->
+        <div class="input-section">
+            <h2 class="section-title">Add Gift</h2>
+            
+            <form class="gift-form" id="giftForm">
+                <div class="form-group full-width">
+                    <label for="giftName">Gift Description:</label>
+                    <input type="text" id="giftName" placeholder="e.g., Blue Sweater, Xbox Game, etc." required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="length">Length (inches):</label>
+                        <input type="number" id="length" step="0.1" min="0.1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="width">Width (inches):</label>
+                        <input type="number" id="width" step="0.1" min="0.1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="height">Height (inches):</label>
+                        <input type="number" id="height" step="0.1" min="0.1" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="wrappingMethod">Wrapping Method:</label>
+                    <select id="wrappingMethod" required>
+                        <option value="paper">Traditional Wrapping Paper</option>
+                        <option value="tissue">Tissue + Cellophane Bag</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="add-gift-btn">📦 Add Gift to Quote</button>
+            </form>
+
+            <div class="quick-actions">
+                <button class="quick-btn" onclick="quickFill('book')">📚 Book</button>
+                <button class="quick-btn" onclick="quickFill('game')">🎮 Game</button>
+                <button class="quick-btn" onclick="quickFill('shirt')">👕 Shirt</button>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="results-section">
+            <h2 class="section-title">Current Quote</h2>
+            
+            <button class="clear-all-btn" onclick="clearAll()">🗑️ Clear All Gifts</button>
+            
+            <div class="discount-selector">
+                <label for="bulkDiscount">Bulk Discount:</label>
+                <select id="bulkDiscount" onchange="updateTotals()">
+                    <option value="0">No Discount (1-4 gifts)</option>
+                    <option value="10">10% OFF (5-9 gifts)</option>
+                    <option value="15">15% OFF (10-19 gifts)</option>
+                    <option value="20">20% OFF (20+ gifts)</option>
+                </select>
+            </div>
+            
+            <div class="gift-list" id="giftList">
+                <div style="text-align: center; color: var(--text-secondary); padding: 2rem;">
+                    No gifts added yet. Start measuring!
+                </div>
+            </div>
+            
+            <div class="totals" id="totals" style="display: none;">
+                <div class="total-row">
+                    <span>Total Gifts:</span>
+                    <span id="totalGifts">0</span>
+                </div>
+                <div class="total-row">
+                    <span>Total Surface Area:</span>
+                    <span id="totalArea">0 sq in</span>
+                </div>
+                <div class="total-row">
+                    <span>Subtotal ($0.03/sq in):</span>
+                    <span id="subtotal">$0.00</span>
+                </div>
+                <div class="total-row" id="discountRow" style="display: none;">
+                    <span>Discount:</span>
+                    <span id="discount">-$0.00</span>
+                </div>
+                <div class="total-row">
+                    <span>TOTAL PRICE:</span>
+                    <span id="finalTotal">$0.00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check if user is logged in
+        if (!sessionStorage.getItem('calculatorLoggedIn')) {
+            window.location.href = 'login.html';
+        }
+
+        let gifts = [];
+        let giftCounter = 0;
+
+        function logout() {
+            sessionStorage.removeItem('calculatorLoggedIn');
+            window.location.href = 'login.html';
+        }
+
+        function calculateSurfaceArea(length, width, height) {
+            const l = parseFloat(length);
+            const w = parseFloat(width);
+            const h = parseFloat(height);
+            
+            // Calculate surface area: 2(lw + lh + wh)
+            return 2 * (l * w + l * h + w * h);
+        }
+
+        function quickFill(type) {
+            const lengthInput = document.getElementById('length');
+            const widthInput = document.getElementById('width');
+            const heightInput = document.getElementById('height');
+            const nameInput = document.getElementById('giftName');
+            
+            switch(type) {
+                case 'book':
+                    lengthInput.value = '8';
+                    widthInput.value = '10';
+                    heightInput.value = '1';
+                    nameInput.value = 'Book';
+                    break;
+                case 'game':
+                    lengthInput.value = '12';
+                    widthInput.value = '9';
+                    heightInput.value = '3';
+                    nameInput.value = 'Board Game';
+                    break;
+                case 'shirt':
+                    lengthInput.value = '10';
+                    widthInput.value = '8';
+                    heightInput.value = '2';
+                    nameInput.value = 'Shirt';
+                    break;
+            }
+        }
+
+        document.getElementById('giftForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            addGift();
+        });
+
+        function addGift() {
+            const name = document.getElementById('giftName').value;
+            const length = document.getElementById('length').value;
+            const width = document.getElementById('width').value;
+            const height = document.getElementById('height').value;
+            const method = document.getElementById('wrappingMethod').value;
+            
+            const surfaceArea = calculateSurfaceArea(length, width, height);
+            const price = surfaceArea * 0.03;
+            
+            const gift = {
+                id: ++giftCounter,
+                name: name,
+                dimensions: `${length}" × ${width}" × ${height}"`,
+                method: method === 'paper' ? 'Wrapping Paper' : 'Tissue + Cellophane',
+                surfaceArea: Math.round(surfaceArea),
+                price: price
+            };
+            
+            gifts.push(gift);
+            updateDisplay();
+            
+            // Clear form
+            document.getElementById('giftForm').reset();
+            document.getElementById('giftName').focus();
+        }
+
+        function removeGift(id) {
+            gifts = gifts.filter(gift => gift.id !== id);
+            updateDisplay();
+        }
+
+        function clearAll() {
+            if (gifts.length > 0 && confirm('Clear all gifts from the quote?')) {
+                gifts = [];
+                updateDisplay();
+            }
+        }
+
+        function updateDisplay() {
+            updateGiftList();
+            updateTotals();
+            updateBulkDiscount();
+        }
+
+        function updateGiftList() {
+            const giftList = document.getElementById('giftList');
+            
+            if (gifts.length === 0) {
+                giftList.innerHTML = `
+                    <div style="text-align: center; color: var(--text-secondary); padding: 2rem;">
+                        No gifts added yet. Start measuring!
+                    </div>
+                `;
+                document.getElementById('totals').style.display = 'none';
+                return;
+            }
+            
+            document.getElementById('totals').style.display = 'block';
+            
+            giftList.innerHTML = gifts.map(gift => `
+                <div class="gift-item">
+                    <div class="gift-header">
+                        <span class="gift-name">${gift.name}</span>
+                        <button class="remove-btn" onclick="removeGift(${gift.id})">×</button>
+                    </div>
+                    <div class="gift-details">
+                        <div><strong>Size:</strong> ${gift.dimensions}</div>
+                        <div><strong>Method:</strong> ${gift.method}</div>
+                        <div><strong>Surface Area:</strong> ${gift.surfaceArea} sq in</div>
+                        <div><strong>Price:</strong> <span class="gift-price">$${gift.price.toFixed(2)}</span></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateBulkDiscount() {
+            const discountSelect = document.getElementById('bulkDiscount');
+            const giftCount = gifts.length;
+            
+            if (giftCount >= 20) {
+                discountSelect.value = '20';
+            } else if (giftCount >= 10) {
+                discountSelect.value = '15';
+            } else if (giftCount >= 5) {
+                discountSelect.value = '10';
+            } else {
+                discountSelect.value = '0';
+            }
+        }
+
+        function updateTotals() {
+            if (gifts.length === 0) return;
+            
+            const totalGifts = gifts.length;
+            const totalArea = gifts.reduce((sum, gift) => sum + gift.surfaceArea, 0);
+            const subtotal = gifts.reduce((sum, gift) => sum + gift.price, 0);
+            const discountPercent = parseFloat(document.getElementById('bulkDiscount').value);
+            const discountAmount = subtotal * (discountPercent / 100);
+            const finalTotal = subtotal - discountAmount;
+            
+            document.getElementById('totalGifts').textContent = totalGifts;
+            document.getElementById('totalArea').textContent = `${totalArea} sq in`;
+            document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('discount').textContent = `-$${discountAmount.toFixed(2)}`;
+            document.getElementById('finalTotal').textContent = `$${finalTotal.toFixed(2)}`;
+            
+            const discountRow = document.getElementById('discountRow');
+            discountRow.style.display = discountPercent > 0 ? 'flex' : 'none';
+        }
+    </script>
+</body>
+</html>
